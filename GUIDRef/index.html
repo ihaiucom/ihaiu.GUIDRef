@@ -1,0 +1,297 @@
+<!-- 
+Created by ihaiu@qq.com on 2016-12-29.
+http://blog.ihaiu.com 
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>项目资源使用情况</title>
+
+	<link rel="stylesheet" type="text/css" href="./style1.css">
+	<link rel="stylesheet" type="text/css" href="./style2.css">
+	<link rel="stylesheet" type="text/css" href="./style3.css">
+	<script type="text/javascript" src="./jquery.js"></script>
+	<script type="text/javascript" src="./data.js"></script>
+	<script type="text/javascript" src="./config.js"></script>
+	<script type="text/javascript" src="./app_data.js"></script>
+	<script type="text/javascript" src="./app_view.js"></script>
+	<script type="text/javascript" src="./main.js"></script>
+</head>
+
+
+
+<body class="gray-bg">
+
+	<template id="tpl-reftype">
+			<div id="__ID__" class="col-lg-3 col-md-6">
+				<div class="widget white-bg __CLS__ selectable">
+					<span class="widget-label">__NAME__ 总数</span>
+					<span class="widget-num">__NUM__</span>
+				</div>
+			</div>
+	</template>
+
+
+	<template id="tpl-assettype">
+			<div id="__ID__" class="col-lg-2 col-md-6">
+				<div class="widget gray-bg text-dsbd-gray selectable">
+					<span class="widget-label">__NAME__</span>
+					<span class="widget-num">__NUM__</span>
+				</div>
+			</div>
+	</template>
+
+
+
+	<template id="tpl-list-tr">
+												<tr role="row" class="odd">
+	                    							<td class="search-for-bundle inline-tags-list  sorting_1"><span name="path">__PATH__</span></td>
+	                    							<td name="guid">__GUID__</td>
+	                    							<td name="reftype">__REFTYPE__</td>
+	                    							<td name="assettype">__ASSETTYPE__</td>
+	                    							<td name="refnum">__REFNUM__</td>
+	                    							<td name="defnum">__DEFNUM__</td>
+	                    						</tr>
+	</template>
+
+
+	<template id="tpl-pagenum-index">
+
+	                    						<li class="paginate_button " page="2"><a>2</a></li>
+	</template>
+
+
+
+
+
+	<div id="page-content" class="wrapper wrapper-content animated fadeInRight">
+
+		<!-- RefType -->
+		<div id="nav-reftype" class="row">
+			
+			<div class="clear"></div>
+
+		</div>
+
+
+		<!-- Type -->
+		<div id="nav-assettype" class="row">
+
+			<div class="clear"></div>
+
+		</div>
+
+		<!-- content -->
+		<div class="row">
+			<div class="col-lg-12" id="ab_table_wrapper">
+
+
+	                <div class="ibox white-bg" id="ab_detail_table">
+	                	<div id="breadcrumb">
+						    <ol class="navbar-nav breadcrumb">
+						        <li id="nav-title-list">
+						            <a ></a>
+						        </li>
+						        <li id="nav-title-item" class="active">
+						            <a ><strong>AssetBundle资源使用情况</strong></a>
+						        </li>
+						    </ol>	
+						</div>
+
+
+
+	                    <div class="ibox-content">
+	                    	<input id="input-search" class="form-control m-b-sm search-bundle-input" placeholder="输入Asset名称关键字或者GUID" type="text">
+
+	                    	<div id="box-list" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+	                    		<!-- table -->
+	                    		<div class="row">
+	                    			<div class="col-sm-12">
+	                    				<table class="detail-table footable table table-stripped table-hover toggle-arrow-tiny dataTable no-footer" data-limit-navigation="5" data-page-size="10" id="DataTables_Table_2" role="grid" style="width: 100%;">
+	                    					<thead>
+	                    						<tr role="row">
+	                    							<th class="search-for-bundle inline-tags-list inline-tags-list-blue sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;" aria-label="Path: activate to sort column descending" aria-sort="ascending">Path</th>
+
+	                    							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 200px;" aria-label="GUID: activate to sort column ascending">GUID</th>
+
+	                    							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="RefType: activate to sort column ascending">RefType</th>
+
+	                    							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="FileType: activate to sort column ascending">FileType</th>
+
+	                    							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="RefNum: activate to sort column ascending">RefNum</th>
+
+	                    							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="DependenciesNum: activate to sort column ascending">DependenciesNum</th>
+	                    						</tr>
+	                    					</thead>
+
+	                    					<tbody id="list-body">
+	                    						
+
+	                    					</tbody>
+
+	                    				</table>
+	                    			</div>
+	                    			<div class="clear"></div>
+	                    		</div>
+
+	                    		<!-- pagniate -->
+	                    		<div class="row">
+	                    			<div class="col-sm-5"></div>
+	                    			<div class="col-sm-7">
+	                    				<div class="dataTables_paginate paging_full_numbers" >
+	                    					<ul class="pagination" id="page-num-list">
+
+	                    						<li class="paginate_button first disabled" id="page-num-first">
+	                    							<a>«</a>
+	                    						</li>
+
+	                    						<li class="paginate_button previous disabled" id="page-num-previous">
+	                    							<a>‹</a>
+	                    						</li>
+
+
+
+
+	                    						<li class="paginate_button active" page="1" id="page-num-index-first"><a>1</a></li>
+
+
+	                    						<li class="paginate_button disabled" id="page-num-ellipsis-before"><a aria-controls="DataTables_Table_2" data-dt-idx="7" tabindex="0">…</a></li>
+
+
+
+	                    						<li class="paginate_button disabled" id="page-num-ellipsis-after"><a>…</a></li>
+
+	                    						<li class="paginate_button " id="page-num-index-last" ><a>172</a></li>
+
+	                    						<li class="paginate_button next" id="page-num-next"><a>›</a></li>
+
+	                    						<li class="paginate_button last" id="page-num-last"><a>»</a></li>
+	                    					</ul>
+	                    				</div>
+	                    			</div>
+	                    			<div class="clear"></div>
+	                    		</div>
+
+	                    	</div>
+
+
+		                    <!-- item info -->
+		                    <div id="item-info">
+
+
+		                    	<table class="rainbow-table">
+		                    		<thead>
+		                    			<tr>
+		                    				<th colspan="6" id="item-info-head-ref">引用它的资源(0) </th>
+		                    			</tr>
+		                    			<tr role="row">
+	            							<th class="search-for-bundle inline-tags-list inline-tags-list-blue sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;" aria-label="Path: activate to sort column descending" aria-sort="ascending">Path</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 200px;" aria-label="GUID: activate to sort column ascending">GUID</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="RefType: activate to sort column ascending">RefType</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="FileType: activate to sort column ascending">FileType</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="RefNum: activate to sort column ascending">RefNum</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="DependenciesNum: activate to sort column ascending">DependenciesNum</th>
+	            						</tr>
+		                    		</thead>
+
+
+		                    		<tbody id="item-info-list-ref">
+
+		                    		</tbody>
+		                    	</table>
+
+
+		                    	
+		                    	<table class="rainbow-table">
+		                    		<thead>
+		                    			<tr>
+		                    				<th colspan="6" id="item-info-head-dep">它直接依赖的资源(0) </th>
+		                    			</tr>
+		                    			<tr role="row">
+	            							<th class="search-for-bundle inline-tags-list inline-tags-list-blue sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;" aria-label="Path: activate to sort column descending" aria-sort="ascending">Path</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 200px;" aria-label="GUID: activate to sort column ascending">GUID</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="RefType: activate to sort column ascending">RefType</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="FileType: activate to sort column ascending">FileType</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="RefNum: activate to sort column ascending">RefNum</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="DependenciesNum: activate to sort column ascending">DependenciesNum</th>
+	            						</tr>
+		                    		</thead>
+
+
+		                    		<tbody id="item-info-list-dep">
+		                    			
+		                    		</tbody>
+		                    	</table>
+
+		                    	<table class="rainbow-table">
+		                    		<thead>
+		                    			<tr>
+		                    				<th colspan="6" id="item-info-head-dep-indirect">它间接依赖的资源(0) </th>
+		                    			</tr>
+		                    			<tr role="row">
+	            							<th class="search-for-bundle inline-tags-list inline-tags-list-blue sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;" aria-label="Path: activate to sort column descending" aria-sort="ascending">Path</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 200px;" aria-label="GUID: activate to sort column ascending">GUID</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="RefType: activate to sort column ascending">RefType</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="FileType: activate to sort column ascending">FileType</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="RefNum: activate to sort column ascending">RefNum</th>
+
+	            							<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;" aria-label="DependenciesNum: activate to sort column ascending">DependenciesNum</th>
+	            						</tr>
+		                    		</thead>
+
+
+		                    		<tbody id="item-info-list-dep-indirect">
+		                    			
+		                    		</tbody>
+		                    	</table>
+
+
+		                    </div>
+
+
+
+	                    </div>
+
+
+
+
+	                </div>
+	         </div>
+
+	         <div class="clear"></div>
+		</div>
+
+
+
+
+
+	</div>
+
+
+
+	<script>
+    window.onload = function() 
+    {
+    	main();
+    }
+    </script>
+
+</body>
+
+</html>
